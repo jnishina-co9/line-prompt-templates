@@ -9,6 +9,13 @@
         ['line','シンプル線画','シンプル線画。点の目、小さな鼻と口、少ない輪郭線、平面的な色、陰影は控えめ。'],
         ['3d','3Dアニメ映画風','3Dアニメ映画風。親しみやすい大きな目、柔らかな立体感、なめらかな質感。']
     ];
+    const textStyles = [
+        ['くっきり太字（標準）','しっかりした太さで読みやすい、くっきりした太字。'],
+        ['まる文字','丸みのある太字。かわいく、やさしい印象。'],
+        ['手書き文字','少しラフで読みやすい、太めの手書き文字。親しみや温かさを出す。'],
+        ['筆文字','筆の強弱を生かし、読みやすさを保った太い筆文字。力強い印象。'],
+        ['ポップ文字','弾むような形の読みやすい太字。明るく楽しい印象。']
+    ];
     const groups = {
         '挨拶・感謝': ['笑顔で両手を大きく振る','笑顔でお辞儀する','笑顔で両腕を広げて歓迎する','穏やかな笑顔で胸に手を当てる','笑顔でお茶を差し出す','にこやかに手招きする','真剣な顔で敬礼する'],
         '喜び・お祝い': ['満面の笑みで拍手する','笑顔でジャンプしながら両手を上げる','ウインクしながらピースする','笑顔で小さくガッツポーズする','楽しそうに踊る','スマホを見て爆笑する','笑い転げる','笑顔でハイタッチを待つ','笑顔でクラッカーを鳴らす','楽しそうにマイクを持って熱唱する'],
@@ -27,6 +34,19 @@
         : groups;
     let chosen = 0;
     let currentStyle = styles[0][2];
+    let textStyleIndex = 0;
+    let currentTextStyle = textStyles[0][1];
+    const textStylePrompts = [
+        '輪郭がくっきりした均一な線幅の太字。安定した字形で、はっきり読みやすくする。',
+        '角や線の端に丸みのある、柔らかな字形のまる文字。かわいく、やさしい印象にする。',
+        '人がペンで書いたような自然な線のゆらぎ、不揃いな字形や傾きのある手書き文字。親しみと温かさを表現する。',
+        '筆圧による線の強弱、筆の入り・払い・はね、適度なかすれを生かした筆文字。文字を判読できる範囲で勢いを表現する。',
+        '文字ごとの大きさや傾きに変化を付け、弾むようなリズムのあるポップ文字。明るく楽しい印象にする。'
+    ];
+    const textStyleLine = value => {
+        const index = textStyles.findIndex(style => style[1] === value);
+        return '- 文字デザイン：' + (index < 0 ? value : textStylePrompts[index]);
+    };
     const poses = [];
     let draft = '';
     const styleLine = value => '- 見た目：' + value;
@@ -50,10 +70,10 @@ ${styleLine(styles[chosen][2])}
 
 ${Array.from({length:total},(_,i) => poseLine(i,poses[i] || '［未選択］')).join('\n')}
 
-## 共通ルール
+${withText ? `## 文字のデザイン\n\n${textStyleLine(currentTextStyle)}\n- 全スタンプに選択した字体の特徴を適用する。文字色は統一せず、各スタンプの表情・セリフに合わせて変える。喜びは赤・オレンジ、驚きは黄色、悲しみは青、愛情はピンクなどを目安に、内容に合う色を選ぶ。全スタンプを黒一色にしない。\n- 文字色に合わせて白・黒などの対比がはっきりする色で文字の輪郭を縁取りし、小さく表示しても読めるようにする。縁取りで選択した字体の特徴を潰さない。\n- 各領域の上下左右に余白を確保し、人物周辺の空きスペースに大きく読みやすく配置する。\n\n` : ''}## 共通ルール
 
 - 表情と動きを分かりやすく表現する。各領域に人物は1人だけ。
-- ${withText ? '各スタンプには指定したセリフを一字一句そのまま1つだけ、太く読みやすく表示する。顔や重要なポーズを隠さず、吹き出しは使わない。セリフ以外の文字・数字・ロゴ・透かしは入れない。キラキラ・後光・星・雨などの演出は各領域内の人物の周りだけに置き、背景色を変えない。' : '文字・セリフ・数字・ロゴ・透かし・吹き出しは一切入れない。'}`;
+- ${withText ? '各スタンプには指定したセリフを一字一句そのまま1つだけ、選択した文字デザインに従い、小さく表示しても読めるように表示する。顔や重要なポーズを隠さず、吹き出しは使わない。セリフ以外の文字・数字・ロゴ・透かしは入れない。キラキラ・後光・星・雨などの演出は各領域内の人物の周りだけに置き、背景色を変えない。' : '文字・セリフ・数字・ロゴ・透かし・吹き出しは一切入れない。'}`;
     }
     const el = (tag, cls, text) => { const n = document.createElement(tag); if(cls)n.className=cls; if(text)n.textContent=text; return n; };
     const build = () => {
@@ -70,7 +90,7 @@ ${Array.from({length:total},(_,i) => poseLine(i,poses[i] || '［未選択］')).
             const matches=lines.map((line,i)=>line.startsWith(prefix)?i:-1).filter(i=>i>=0);
             if(matches.length!==1) { alert('変更する行を特定できませんでした。手動編集を保護するため、自動反映を見送りました。プロンプト内に「'+prefix+'」で始まる行を1行用意してから、もう一度選択してください。'); return false; }
             const index=matches[0];
-            const previous=prefix==='- 見た目：' ? styleLine(currentStyle) : poseLine(Number(prefix.split('.')[0])-1,poses[Number(prefix.split('.')[0])-1]);
+            const previous=prefix==='- 文字デザイン：' ? textStyleLine(currentTextStyle) : prefix==='- 見た目：' ? styleLine(currentStyle) : poseLine(Number(prefix.split('.')[0])-1,poses[Number(prefix.split('.')[0])-1]);
             if(lines[index]!==previous && !confirm('この項目は手動編集されています。この行だけ選択内容で置き換えますか？'))return false;
             lines[index]=value; editor.value=lines.join('\n'); draft=editor.value; if(prefix==='- 見た目：')currentStyle=value.slice(prefix.length); return true;
         }
@@ -150,11 +170,54 @@ ${Array.from({length:total},(_,i) => poseLine(i,poses[i] || '［未選択］')).
             apply.onclick=()=>{const v=withText ? pairLine({pose:poseInput.value.trim().replace(/\s*\n\s*/g,' '),phrase:phraseInput.value.trim().replace(/\s*\n\s*/g,' ')}) : input.value.trim().replace(/\s*\n\s*/g,' ');if(withText && !poseInput.value.trim()){poseInput.focus();return;}if(withText && !phraseInput.value.trim()){phraseInput.focus();return;}if(!v){input.focus();return;}const next=[...poses];if(index===null){if(next.length>=total)return;next.push(v);}else next[index]=v;if(updatePoses(next))dialog.close();};
             cancel.onclick=()=>dialog.close();actions.append(apply,cancel);dialog.append(title,catLabel,category,options,inputLabel);if(withText){const poseLabel=el('label','','ポーズ');poseLabel.htmlFor=poseInput.id;const phraseLabel=el('label','','セリフ');phraseLabel.htmlFor=phraseInput.id;dialog.append(poseLabel,poseInput,phraseLabel,phraseInput);}else dialog.append(input);dialog.append(actions);document.body.append(dialog);dialog.addEventListener('close',()=>dialog.remove(),{once:true});dialog.showModal();
         }
-        const block=el('div','prompt-block');const label=el('label','prompt-block-label','3. プロンプトを確認・編集');label.htmlFor=editor.id;
+        if (withText) {
+            card.append(el('h3','step-title','3. 文字のデザインを選ぶ'),el('p','builder-note','選んだ文字デザインを、すべてのスタンプに共通で適用します。'));
+            const selectedTextStyle=el('span','',textStyles[textStyleIndex][0]);
+            selectedTextStyle.setAttribute('role','status');
+            const textCategories=el('div','category-grid');
+            textStyles.forEach((style,i)=>{
+                const button=el('button','category-choice',style[0]);button.type='button';
+                button.setAttribute('aria-haspopup','dialog');
+                button.onclick=()=>openTextStyle(i,button);textCategories.append(button);
+            });
+            card.append(textCategories,selectedTextStyle);
+            function openTextStyle(index,trigger){
+                const dialog=el('dialog','pose-dialog');
+                const title=el('h3','','文字のデザインを変更');title.id=id('text-style-title');dialog.setAttribute('aria-labelledby',title.id);
+                const category=el('select');category.id=id('text-style-category');
+                textStyles.forEach((style,i)=>{const option=el('option','',style[0]);option.value=String(i);category.append(option);});category.value=String(index);
+                const categoryLabel=el('label','','カテゴリ');categoryLabel.htmlFor=category.id;
+                const options=el('div','pose-options text-style-options');
+                const customLabel=el('label','','選んだ内容（自由入力・編集もできます）');customLabel.htmlFor=id('custom-text-style');
+                const custom=el('textarea');custom.id=customLabel.htmlFor;
+                custom.value=textStyleIndex===index||textStyleIndex===-1?currentTextStyle:textStyles[index][1];
+                function draw(){
+                    options.replaceChildren();
+                    const style=textStyles[Number(category.value)];
+                    const button=el('button','',style[1]);button.type='button';button.setAttribute('aria-pressed',String(custom.value===style[1]));
+                    button.onclick=()=>{custom.value=style[1];draw();};options.append(button);
+                }
+                category.onchange=draw;custom.oninput=draw;draw();
+                const actions=el('div','builder-actions');
+                const apply=el('button','copy-btn','変更する');apply.type='button';
+                const cancel=el('button','copy-btn','キャンセル');cancel.type='button';
+                apply.onclick=()=>{
+                    const value=custom.value.trim().replace(/\s*\n\s*/g,' ');
+                    if(!value){custom.focus();return;}
+                    if(!replaceLine('- 文字デザイン：',textStyleLine(value)))return;
+                    textStyleIndex=textStyles.findIndex(style=>style[1]===value);currentTextStyle=value;
+                    selectedTextStyle.textContent=textStyleIndex===-1?'自由入力：'+value:textStyles[textStyleIndex][0];
+                    dialog.close();
+                };
+                cancel.onclick=()=>dialog.close();actions.append(apply,cancel);dialog.append(title,categoryLabel,category,options,customLabel,custom,actions);
+                document.body.append(dialog);dialog.addEventListener('close',()=>{dialog.remove();trigger.focus();},{once:true});dialog.showModal();
+            };
+        }
+        const block=el('div','prompt-block');const heading=el('h3','step-title',withText ? '4. プロンプトを確認・編集' : '3. プロンプトを確認・編集');heading.id=id('prompt-edit-title');editor.setAttribute('aria-labelledby',heading.id);
         const copy=el('button','copy-btn','プロンプトをコピー');const status=el('span'); status.setAttribute('role','status');
         copy.onclick=async()=>{try{if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(editor.value);}else{editor.focus();editor.select();if(!document.execCommand('copy'))throw Error();}status.textContent='コピーしました';}catch{status.textContent='コピーできませんでした。入力欄を選択して手動でコピーしてください。';}};
         const actions=el('div','builder-actions');actions.append(copy,status);
-        block.append(label,el('p','builder-note','直接編集できます。選択を変えると、その項目の行だけを更新します。'),editor,actions);card.append(block);return card;
+        block.append(el('p','builder-note','直接編集できます。選択を変えると、その項目の行だけを更新します。'),editor,actions);card.append(heading,block);return card;
     };
     return build();
     }

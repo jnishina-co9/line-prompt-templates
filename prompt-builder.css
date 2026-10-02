@@ -39,3 +39,10 @@
  .pose-dialog .pose-options { grid-template-columns:1fr; }
  .pose-dialog { padding:20px; width:90vw; }
 }
+
+.prompt-builder > .step-title:not(:first-child):not(:nth-child(2)) { margin-top:32px; }
+@media(max-width:767px) {
+ .prompt-builder > .step-title:not(:first-child):not(:nth-child(2)) { margin-top:24px; }
+}
+
+.pose-dialog .pose-options.text-style-options { grid-template-columns:1fr; }
