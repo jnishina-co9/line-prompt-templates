@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LINEスタンプ画像用プロンプト集 | PROMPT TEMPLATES</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="prompt-builder.css">
+    <script src="prompt-builder.js"></script>
+    <script src="prompt-pairs.js"></script>
+    <style>
+        /*
+         * Minimal Web App Design System (line-animationsticker.html踏襲)
+         * Colors: Base (#FFFFFF), Main (#2E9E64), Accent (#EAF7EE), Sub (#A9DFC4)
+         * Radii: 0px, Shadows: none, Borders: none
+         */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 300;
+            background-color: #FFFFFF;
+            color: #2E9E64;
+            margin: 0;
+            padding: 48px 24px 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        h1 {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin: 0;
+            color: #2E9E64;
+            letter-spacing: 0.05em;
+        }
+
+        .subtitle {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: #2E9E64;
+            letter-spacing: 0.1em;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto 48px;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .card {
+            background-color: #EAF7EE;
+            padding: 48px;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            box-sizing: border-box;
+        }
+
+        .step-section {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step-title {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #2E9E64;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .hint-text {
+            font-size: 16px;
+            color: #2E9E64;
+            font-weight: 400;
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        #about-card {
+            padding: 32px 40px;
+        }
+
+        .manual-list {
+            margin: 0;
+            padding-left: 1.2em;
+            font-size: 14px;
+            color: #2E9E64;
+        }
+
+        .manual-list li {
+            margin-bottom: 8px;
+        }
+
+        .guideline-link-box {
+            margin-top: 14px;
+        }
+
+        .guideline-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #FFFFFF;
+            color: #2E9E64;
+            padding: 12px 22px;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            transition: opacity 0.2s ease;
+            width: fit-content;
+        }
+
+        .guideline-link:hover {
+            opacity: 0.85;
+        }
+
+        .guideline-link .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* スタンプ種別切り替えタブ */
+        .mode-tabs {
+            display: flex;
+            gap: 2px;
+            background-color: #EAF7EE;
+            padding: 0;
+        }
+
+        .mode-tab-btn {
+            flex: 1;
+            background-color: transparent;
+            color: #2E9E64;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 16px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .mode-tab-btn:hover {
+            opacity: 0.85;
+        }
+
+        .mode-tab-btn.active {
+            background-color: #2E9E64;
+            color: #FFFFFF;
+        }
+
+        /* 文字有無切り替えタブ */
+        .text-option-tabs {
+            display: flex;
+            gap: 2px;
+            background-color: #EAF7EE;
+            padding: 0;
+        }
+
+        .text-option-btn {
+            flex: 1;
+            background-color: transparent;
+            color: #2E9E64;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .text-option-btn .icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .text-option-btn:hover {
+            opacity: 0.85;
+        }
+
+        .text-option-btn.active {
+            background-color: #2E9E64;
+            color: #FFFFFF;
+        }
+
+        /* タブ切り替え */
+        .tabs {
+            display: flex;
+            gap: 2px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            background-color: #EAF7EE;
+            color: #2E9E64;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 20px;
+            cursor: pointer;
+            transition: opacity 0.2s ease;
+        }
+
+        .tab-btn:hover {
+            opacity: 0.85;
+        }
+
+        .tab-btn.active {
+            background-color: #2E9E64;
+            color: #FFFFFF;
+        }
+
+        .mode-tab-btn:disabled,
+        .tab-btn:disabled {
+            background-color: #EEEEEE;
+            color: #999999;
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        /* 個数パネル・グリッド構成カード */
+        #panels {
+            display: contents;
+        }
+
+        .count-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .grid-option .step-title {
+            font-size: 20px;
+        }
+
+        /* プロンプトブロック */
+        .prompt-block {
+            background-color: #FFFFFF;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            box-sizing: border-box;
+        }
+
+        .prompt-block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .prompt-block-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            color: #2E9E64;
+        }
+
+        .prompt-block-label .icon {
+            width: 18px;
+            height: 18px;
+        }
+
+        .copy-btn {
+            background-color: #2E9E64;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 0px;
+            box-shadow: none;
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.2s ease, background-color 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .copy-btn .icon {
+            width: 16px;
+            height: 16px;
+        }
+
+        .copy-btn:hover {
+            opacity: 0.85;
+        }
+
+        .copy-btn.copied {
+            background-color: #A9DFC4;
+            color: #2E9E64;
+        }
+
+        .prompt-text {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 1.9;
+            color: #2E9E64;
+        }
+
+        .prompt-text .placeholder {
+            background-color: #EAF7EE;
+            color: #2E9E64;
+            font-weight: 700;
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            padding: 2px 4px;
+        }
+
+        /* フッター */
+        .footer {
+            padding: 24px 0;
+            text-align: center;
+            background-color: #FFFFFF;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .footer__copy {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 14px;
+            color: #2E9E64;
+            margin: 0;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 767px) {
+            body {
+                padding: 24px 16px 0;
+            }
+
+            .container {
+                margin: 0 auto 32px;
+            }
+
+            .card {
+                padding: 24px;
+                gap: 20px;
+            }
+
+            .header-section {
+                margin-bottom: 32px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .subtitle {
+                font-size: 14px;
+            }
+
+            .step-title {
+                font-size: 20px;
+            }
+
+            .grid-option .step-title {
+                font-size: 18px;
+            }
+
+            .mode-tab-btn {
+                padding: 12px 8px;
+                font-size: 15px;
+            }
+
+            .text-option-btn {
+                padding: 12px 8px;
+                font-size: 14px;
+            }
+
+            .tab-btn {
+                padding: 14px 8px;
+                font-size: 14px;
+            }
+
+            .prompt-block {
+                padding: 16px;
+            }
+
+            .prompt-block-label {
+                font-size: 14px;
+            }
+
+            .copy-btn {
+                font-size: 13px;
+                padding: 8px 16px;
+            }
+
+            .prompt-text {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>PROMPT TEMPLATES</h1>
+            <div class="subtitle">- LINEスタンプ画像用プロンプト集 -</div>
+        </div>
+
+        <div class="mode-tabs" id="mode-tabs">
+            <button class="mode-tab-btn active" data-mode="static">スタンプ</button>
+            <button class="mode-tab-btn" data-mode="animation" disabled>アニメーションスタンプ</button>
+        </div>
+
+        <div class="card" id="about-card">
+            <div class="step-section" id="about-content"></div>
+        </div>
+
+        <div class="text-option-tabs" id="text-option-tabs">
+            <button class="text-option-btn active" data-text-mode="none">
+                <i data-lucide="image" class="icon"></i> ① 文字なし
+            </button>
+            <button class="text-option-btn" data-text-mode="with-text">
+                <i data-lucide="message-square" class="icon"></i> ② 文字あり (セリフ入り)
+            </button>
+        </div>
+
+        <div class="tabs" id="tabs"></div>
+
+        <div id="panels"></div>
+
+        <!-- メイン画像・タブ画像の専用プロンプトは改修まで非表示
+        <div class="card" id="main-tab-card">
+            <div class="step-section" id="main-tab-content"></div>
+            <div id="main-tab-prompts"></div>
+        </div>
+        -->
+    </div>
+
+    <script>
+    (function () {
+        "use strict";
+
+        let currentMode = "static";
+        let currentTextMode = "none";
+        let currentCount = 8;
+
+        const MODES = {
+            static: {
+                name: "スタンプ",
+                counts: [8, 16, 24, 32, 40],
+                configs: {
+                    8: [{ rows: 2, cols: 4 }],
+                    16: [{ rows: 2, cols: 8 }],
+                    24: [{ rows: 4, cols: 6 }],
+                    32: [{ rows: 4, cols: 8 }],
+                    40: [{ rows: 5, cols: 8 }],
+                },
+                aboutDesc: "写真をもとに、LINEスタンプ用のイラストを生成するためのプロンプト集です。\n文字の有無とスタンプの枚数を選び、表示されたプロンプトをコピーして、画像生成AIで写真と一緒に使用してください。\n\nご利用の前に、最新情報をLINE公式の制作ガイドラインでご確認ください。",
+                guidelineUrl: "https://creator.line.me/ja/guideline/sticker/",
+                guidelineLabel: "LINE公式 制作ガイドライン（スタンプ）",
+                mainTabTitle: "メイン画像・タブ画像 専用プロンプト(任意)",
+                mainTabDesc: "被写体を1体だけ大きく写した専用カットで、メイン画像(240×240)・タブ画像(96×74)を作りたい場合のプロンプトです。スタンプ一覧の中から代表的な1マスを選んで流用する場合は不要です。",
+                mainTabList: [
+                    "スタンプ画像生成用プロンプトと同様、写真を添付してイラスト化する想定です(グリッドではなく1体だけの構図になります)",
+                    "メイン画像(240×240・静止PNG)とタブ画像(96×74・静止PNG)の両方に使えます",
+                ],
+            },
+            animation: {
+                name: "アニメーションスタンプ",
+                counts: [8, 16, 24],
+                configs: {
+                    8: [{ rows: 2, cols: 4 }],
+                    16: [{ rows: 4, cols: 4 }],
+                    24: [{ rows: 4, cols: 6 }],
+                },
+                aboutDesc: "写真から①で元イラストを生成し、その画像を添付して②で動画化します。",
+                guidelineUrl: "https://creator.line.me/ja/guideline/animationsticker/",
+                guidelineLabel: "LINE公式 制作ガイドライン (アニメーションスタンプ)",
+                mainTabTitle: "メイン画像・タブ画像 専用プロンプト(任意)",
+                mainTabDesc: "被写体を1体だけ大きく写した専用カットで、メイン画像(240×240)・タブ画像(96×74)を作りたい場合のプロンプトです。スタンプ本体用の動画から代表的な1マスを選んで流用する場合は不要です。",
+                mainTabList: [
+                    "①代表イラスト生成用プロンプト: 上のスタンプ本体用と同様、写真を添付してイラスト化する想定です(グリッドではなく1体だけの構図になります)",
+                    "②動画生成用プロンプト: ①のイラストを添付し直し、image-to-videoで動かす想定です",
+                    "②で生成した動画をそのまま「MAIN & TAB IMAGE」ツールに読み込むと、メイン画像(APNG)とタブ画像(静止PNG)を同時に生成できます",
+                ],
+            }
+        };
+
+        /* ----------------------------------------------------
+         * スタンプ (静止画) プロンプト
+         * ---------------------------------------------------- */
+        function staticStampPrompt(rows, cols, count) {
+            return `添付した画像(人物の顔やペットなどの写真)を元に、LINEスタンプ制作用の元イラストを1枚のグリッド画像として生成してください。
+
+【添付画像の扱い方】
+・添付画像に写っている被写体の特徴(顔立ちや体型、毛色・柄、髪型、目の形、耳や尻尾の形など)を保ちつつ、写真そのものではなく、LINEスタンプらしいシンプルな線画イラストに変換してください。肌や毛の質感、写真的な陰影など写実的な表現はそのまま残さないでください。
+・[ここにイラストのタッチを指定してください(例: 2〜3頭身のデフォルメ・ちびキャラ風、フラットな塗りのアニメ調 など)]
+
+【グリッド構成(区切り線は描かない)】
+・画像全体を${rows}行×${cols}列(合計${count}マス)のマス目状に、均等な間隔を空けて配置してください。
+・マスとマスの境界を示す罫線・グリッド線・仕切り線・枠線は絶対に描かないでください。背景は画像全体を通して継ぎ目のない1色の無地にし、マスの区切りが線や色の変化として見た目に分からないようにしてください(マス目はあくまで配置の目安で、あとで人間が座標を指定して均等に切り出すため、視覚的な境界線は不要です)。
+・各マスの縦横比は約370:320(ヨコ:タテ ≒ 1.15:1)に近づけ、キャラクター同士の間隔が均等になるようにしてください。
+・添付画像の被写体を1体ずつ全マスに描き、マスごとに日常会話で使いやすい異なるポーズ・表情(例: 挨拶、喜ぶ、驚く、うなずく、お辞儀、OKサイン、感謝、お疲れ様など)にしてください。
+・各マスのキャラクターの周囲に、切り抜き・トリミング用の適度な余白(目安: 各辺に対して10〜15%程度)を空けて配置してください。余白部分にも床・影・装飾などの要素は描かず、背景と同じ単色のままにしてください。
+
+【キャラクターの一貫性】
+・全${count}マスで、添付画像から起こしたキャラクターの体型・配色・絵柄タッチ・顔立ちを完全に統一してください。マスごとにキャラクターがブレたり別人・別の個体になったりしないようにしてください。
+
+【背景・色数(LINE審査対応)】
+・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
+・キャラクターの配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。LINEスタンプは縮小表示されるため、輪郭線をくっきり太めに描くと視認性が高まります。
+
+【禁止事項】
+・マス目を区切る罫線・グリッド線・仕切り線・枠線は一切描かないでください。
+・文字、ロゴ、フレーム線、透かしも入れないでください。
+・添付画像の実写的な質感(写真そのものの見た目)を残さないでください。必ずイラストとして描き起こしてください。
+・背景やキャラクター周りの余白に、影・床面・グラデーション・色付きの装飾パネルなど、単色以外の要素を追加しないでください。`;
+        }
+
+        function staticStampPromptWithText(rows, cols, count) {
+            return `添付した画像(人物の顔やペットなどの写真)を元に、LINEスタンプ制作用の元イラスト(セリフ・文字入り)を1枚のグリッド画像として生成してください。
+
+【添付画像の扱い方】
+・添付画像に写っている被写体の特徴(顔立ちや体型、毛色・柄、髪型、目の形、耳や尻尾の形など)を保ちつつ、写真そのものではなく、LINEスタンプらしいシンプルな線画イラストに変換してください。肌や毛の質感、写真的な陰影など写実的な表現はそのまま残さないでください。
+・[ここにイラストのタッチを指定してください(例: 2〜3頭身のデフォルメ・ちびキャラ風、フラットな塗りのアニメ調 など)]
+
+【グリッド構成(区切り線は描かない)】
+・画像全体を${rows}行×${cols}列(合計${count}マス)のマス目状に、均等な間隔を空けて配置してください。
+・マスとマスの境界を示す罫線・グリッド線・仕切り線・枠線は絶対に描かないでください。背景は画像全体を通して継ぎ目のない1色の無地にし、マスの区切りが線や色の変化として見た目に分からないようにしてください(マス目はあくまで配置の目安で、あとで人間が座標を指定して均等に切り出すため、視覚的な境界線は不要です)。
+・各マスの縦横比は約370:320(ヨコ:タテ ≒ 1.15:1)に近づけ、キャラクター同士の間隔が均等になるようにしてください。
+・添付画像の被写体を1体ずつ全マスに描き、マスごとに日常会話で使いやすい異なるポーズ・表情(例: 挨拶、喜ぶ、驚く、うなずく、お辞儀、OKサイン、感謝、お疲れ様など)にしてください。
+・各マスのキャラクターおよびセリフ文字の周囲に、切り抜き・トリミング用の適度な余白(目安: 各辺に対して10〜15%程度)を空けて配置してください。余白部分にも床・影・装飾などの要素は描かず、背景と同じ単色のままにしてください。
+
+【セリフ・テキストの配置(視認性重視)】
+・全${count}マスのキャラクターに、ポーズや表情に合わせたLINE日常会話で使いやすい短いセリフ(ひらがな・カタカナ・簡単な漢字・感嘆符)を添えてください。
+・[ここに各マスのセリフ案を記入してください(例: 1:ありがとう 2:おつかれさま 3:OK 4:了解 5:ぺこり 6:おやすみ 7:びっくり 8:わーい など)]
+・文字はスマートフォンの小さな画面で縮小表示されても一目で読めるよう、太めのポップ体や丸ゴシック調のフォント風にし、太い白フチや黒フチを付けて背景やキャラクターから浮き立たせてください。
+・文字の配置はキャラクターの頭上や横の空きスペースに、キャラクターの顔や主要なポーズを邪魔しないようにバランスよく配置してください。
+
+【キャラクターの一貫性】
+・全${count}マスで、添付画像から起こしたキャラクターの体型・配色・絵柄タッチ・顔立ちを完全に統一してください。マスごとにキャラクターがブレたり別人・別の個体になったりしないようにしてください。
+
+【背景・色数(LINE審査対応)】
+・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
+・キャラクターや文字の配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。LINEスタンプは縮小表示されるため、輪郭線やくっきりしたフチ取りを入れると視認性が高まります。
+
+【禁止事項】
+・マス目を区切る罫線・グリッド線・仕切り線・枠線は一切描かないでください。
+・小さすぎて読めない長文のテキスト、ロゴ、フレーム線、透かしは入れないでください。
+・意図しない文字化けや意味の通らない誤字・崩れた文字が入らないよう、シンプルで明瞭な日本語にしてください。
+・添付画像の実写的な質感(写真そのものの見た目)を残さないでください。必ずイラストとして描き起こしてください。
+・背景やキャラクター周りの余白に、影・床面・グラデーション・色付きの装飾パネルなど、単色以外の要素を追加しないでください。`;
+        }
+
+        function staticMainImagePrompt() {
+            return `添付した画像(人物の顔やペットなどの写真)を元に、LINEスタンプの「メイン画像」「トークルームタブ画像」用に、被写体を1体だけ大きく描いた代表イラストを1枚生成してください。
+
+【添付画像の扱い方】
+・添付画像に写っている被写体の特徴(顔立ちや体型、毛色・柄、髪型、目の形、耳や尻尾の形など)を保ちつつ、写真そのものではなく、LINEスタンプらしいシンプルな線画イラストに変換してください。肌や毛の質感、写真的な陰影など写実的な表現はそのまま残さないでください。
+・[ここにイラストのタッチを指定してください(スタンプ本体用に指定したタッチと揃えてください)]
+・[ここに服装・小物など、添付画像に無い設定があれば記入してください]
+・スタンプ本体用に別途イラストを作っている場合は、そのキャラクターと体型・配色・絵柄タッチ・顔立ちが完全に一致するようにしてください。
+
+【構図・ポーズ】
+・被写体を画面中央に大きく、上下左右に適度な余白(目安: 各辺10〜15%)を残して1体だけ配置してください。このスタンプセット全体を代表する、最も親しみやすい・分かりやすいポーズ・表情にしてください(例: 笑顔で手を振る、正面を向いて微笑む など)。
+・[ここに具体的なポーズ・表情を記入してください]
+・出力画像の縦横比は正方形(1:1)に近づけてください。
+・余白部分にも床・影・色面・模様などの新しい要素は一切描き加えず、背景と全く同じ単色のままにしてください。
+
+【背景・色数(LINE審査対応)】
+・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
+・キャラクターの配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。
+
+【禁止事項】
+・文字、ロゴ、フレーム線、透かしも入れないでください。
+・添付画像の実写的な質感(写真そのものの見た目)を残さないでください。必ずイラストとして描き起こしてください。
+・背景やキャラクター周りの余白に、影・床面・グラデーション・色付きの装飾パネルなど、単色以外の要素を追加しないでください。`;
+        }
+
+        function staticMainImagePromptWithText() {
+            return `添付した画像(人物の顔やペットなどの写真)を元に、LINEスタンプの「メイン画像」「トークルームタブ画像」用に、被写体を1体だけ大きく描いた代表イラスト(セリフ・文字入り)を1枚生成してください。
+
+【添付画像の扱い方】
+・添付画像に写っている被写体の特徴(顔立ちや体型、毛色・柄、髪型、目の形、耳や尻尾の形など)を保ちつつ、写真そのものではなく、LINEスタンプらしいシンプルな線画イラストに変換してください。肌や毛の質感、写真的な陰影など写実的な表現はそのまま残さないでください。
+・[ここにイラストのタッチを指定してください(スタンプ本体用に指定したタッチと揃えてください)]
+・[ここに服装・小物など、添付画像に無い設定があれば記入してください]
+・スタンプ本体用に別途イラストを作っている場合は、そのキャラクターと体型・配色・絵柄タッチ・顔立ちが完全に一致するようにしてください。
+
+【セリフ・文字の配置(任意)】
+・[ここにメイン画像に入れたいセリフやタイトルを記入してください(例: ありがとう、よろしく、または文字不要の場合はこの項目を削除)]
+・文字を入れる場合は、縮小表示されても読みやすいよう太字フチ付きで、キャラクターの邪魔にならない位置に配置してください。
+
+【構図・ポーズ】
+・被写体を画面中央に大きく、上下左右に適度な余白(目安: 各辺10〜15%)を残して1体だけ配置してください。このスタンプセット全体を代表する、最も親しみやすい・分かりやすいポーズ・表情にしてください(例: 笑顔で手を振る、正面を向いて微笑む など)。
+・[ここに具体的なポーズ・表情を記入してください]
+・出力画像の縦横比は正方形(1:1)に近づけてください。
+・余白部分にも床・影・色面・模様などの新しい要素は一切描き加えず、背景と全く同じ単色のままにしてください。
+
+【背景・色数(LINE審査対応)】
+・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
+・キャラクターや文字の配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。
+
+【禁止事項】
+・意図しない文字化けや誤字、小さすぎる長文、ロゴ、フレーム線、透かしは入れないでください。
+・添付画像の実写的な質感(写真そのものの見た目)を残さないでください。必ずイラストとして描き起こしてください。
+・背景やキャラクター周りの余白に、影・床面・グラデーション・色付きの装飾パネルなど、単色以外の要素を追加しないでください。`;
+        }
+
+        /* ----------------------------------------------------
+         * アニメーションスタンプ プロンプト
+         * ---------------------------------------------------- */
+        function animationFlowPrompt(rows, cols, count) {
+            return `添付したグリッドイラスト(${rows}行×${cols}列・合計${count}マス)を入力画像として、image-to-videoで動画化してください。添付画像に描かれているキャラクター・配色・構図をそのまま忠実に再現し、新しく描き直したり、別のデザインに変えたりしないでください。
+
+【忠実に再現すべき点(添付画像から変更しない)】
+・画面のレイアウト(${rows}行×${cols}列・合計${count}マス)、各マスの位置、キャラクターの体型・配色・絵柄タッチ・顔立ち、各マスのポーズ・表情は、添付画像のまま忠実に維持してください。
+・マスとマスの境界を示す罫線・グリッド線・仕切り線・枠線は新たに追加しないでください。背景は添付画像と同じ単色のまま、継ぎ目なく維持してください。
+・出力する動画のアスペクト比も、添付画像と同じ比率にしてください。
+
+【動きの指定】
+・各マスのキャラクターに、そのマスのポーズに合った短い動き(例: 手を振る、ジャンプする、うなずく、瞬きする など)をそれぞれ付けてください。
+・[ここに${count}マス分の動きの案を記入してください(添付画像の各ポーズに対応させる)]
+・各マスの動きは、開始時と終了時でキャラクターがほぼ同じ姿勢に戻る、1〜2秒程度の短いループ動作にしてください。
+・カメラはズーム・パンをせず固定し、各マスの中でキャラクター全体が常にフレーム内に収まるようにしてください。
+・手を振る・跳ねるなどの動きを付ける際も、体や手足が自分のマスの範囲(添付画像でそのキャラクターに割り当てられた余白の中)を超えて隣のマスの領域まではみ出さないようにしてください。各マスはあとで個別に切り出すため、はみ出した部分は欠けたり、隣のスタンプに映り込んでしまいます。
+
+【容量対応(LINE審査対応)】
+・動きを付ける際も、添付画像にない複雑なグラデーション・光沢・粒子エフェクト・ノイズを新たに発生させないでください。LINEスタンプは1個あたり最大320×270px・5〜20フレーム・最大4秒(1/2/3/4秒のいずれか)のAPNGに変換するため、情報量が多いと容量オーバーやコマ落ちの原因になります。
+
+【禁止事項】
+・マス目を区切る罫線・グリッド線・仕切り線・枠線は一切描画しないでください。
+・文字、ロゴ、時計・日付などの透かしも入れないでください。
+・音声・BGMは生成しないでください(無音のままで構いません)。`;
+        }
+
+        function animationFlowPromptWithText(rows, cols, count) {
+            return `添付したグリッドイラスト(${rows}行×${cols}列・合計${count}マス)を入力画像として、image-to-videoで動画化してください。添付画像に描かれているキャラクター・セリフ文字・配色・構図をそのまま忠実に再現し、新しく描き直したり、別のデザインに変えたりしないでください。
+
+【忠実に再現すべき点(添付画像から変更しない)】
+・画面のレイアウト(${rows}行×${cols}列・合計${count}マス)、各マスの位置、キャラクターの体型・配色・絵柄タッチ・顔立ち、各マスのポーズ・表情、および各マスのセリフ文字は、添付画像のまま忠実に維持してください。
+・マスとマスの境界を示す罫線・グリッド線・仕切り線・枠線は新たに追加しないでください。背景は添付画像と同じ単色のまま、継ぎ目なく維持してください。
+・出力する動画のアスペクト比も、添付画像と同じ比率にしてください。
+
+【文字(セリフ)の扱い】
+・添付画像に描かれているセリフ文字は、動画化の過程で文字化け・溶け・崩れ・消失が起きないよう、静止させたまま維持するか、キャラクターの動きに合わせて自然に揺れる程度にとどめてください。文字のフォントや文言を変えたり、新しい文字を追加したりしないでください。
+
+【動きの指定】
+・各マスのキャラクターに、そのマスのポーズやセリフに合った短い動き(例: 手を振る、ジャンプする、うなずく、瞬きする など)をそれぞれ付けてください。
+・[ここに${count}マス分の動きの案を記入してください(添付画像の各ポーズに対応させる)]
+・各マスの動きは、開始時と終了時でキャラクターがほぼ同じ姿勢に戻る、1〜2秒程度の短いループ動作にしてください。
+・カメラはズーム・パンをせず固定し、各マスの中でキャラクターと文字全体が常にフレーム内に収まるようにしてください。
+・手を振る・跳ねるなどの動きを付ける際も、体や手足・文字が自分のマスの範囲(添付画像でそのキャラクターに割り当てられた余白の中)を超えて隣のマスの領域まではみ出さないようにしてください。各マスはあとで個別に切り出すため、はみ出した部分は欠けたり、隣のスタンプに映り込んでしまいます。
+
+【容量対応(LINE審査対応)】
+・動きを付ける際も、添付画像にない複雑なグラデーション・光沢・粒子エフェクト・ノイズを新たに発生させないでください。LINEスタンプは1個あたり最大320×270px・5〜20フレーム・最大4秒(1/2/3/4秒のいずれか)のAPNGに変換するため、情報量が多いと容量オーバーやコマ落ちの原因になります。
+
+【禁止事項】
+・マス目を区切る罫線・グリッド線・仕切り線・枠線は一切描画しないでください。
+・新しい文字、ロゴ、時計・日付などの透かしも入れないでください。
+・音声・BGMは生成しないでください(無音のままで構いません)。`;
+        }
+
+        function animationStampPrompt(rows, cols, count) {
+            return `添付した画像(人物の顔やペットなどの写真)を元に、LINEアニメーションスタンプ制作用の元イラストを1枚のグリッド画像として生成してください。
+
+【添付画像の扱い方】
+・添付画像に写っている被写体の特徴(顔立ちや体型、毛色・柄、髪型、目の形、耳や尻尾の形など)を保ちつつ、写真そのものではなく、LINEスタンプらしいシンプルな線画イラストに変換してください。肌や毛の質感、写真的な陰影など写実的な表現はそのまま残さないでください。
+・[ここにイラストのタッチを指定してください(例: 2〜3頭身のデフォルメ・ちびキャラ風、フラットな塗りのアニメ調 など)]
+
+【グリッド構成(区切り線は描かない)】
+・画像全体を${rows}行×${cols}列(合計${count}マス)のマス目状に、均等な間隔を空けて配置してください。
+・マスとマスの境界を示す罫線・グリッド線・仕切り線・枠線は絶対に描かないでください。背景は画像全体を通して継ぎ目のない1色の無地にし、マスの区切りが線や色の変化として見た目に分からないようにしてください(マス目はあくまで配置の目安で、あとで人間が座標を指定して均等に切り出すため、視覚的な境界線は不要です)。
+・各マスの縦横比は約320:270(ヨコ:タテ ≒ 6:5)に近づけ、キャラクター同士の間隔が均等になるようにしてください。
+・添付画像の被写体を1体ずつ全マスに描き、マスごとに日常会話で使いやすい異なるポーズ・表情(例: 挨拶、喜ぶ、驚く、うなずく、お辞儀、OKサイン、感謝など)にしてください。
+・【最重要・余白の確保】後の動画化で見切れないよう、各マスの上下左右に十分な余白(目安: 各辺に対して30%程度、キャラクターはマス中央に小さめ)を確保して配置してください。手を振る・ジャンプするなどの動きを付けてもマスの枠からはみ出さないよう、可動域となる余白をしっかり空けてください。余白部分にも床・影・装飾などの要素は一切描かず、背景と同じ単色のままにしてください。
+
+【キャラクターの一貫性】
+・全${count}マスで、添付画像から起こしたキャラクターの体型・配色・絵柄タッチ・顔立ちを完全に統一してください。マスごとにキャラクターがブレたり別人・別の個体になったりしないようにしてください。
+
+【背景・色数(LINE審査対応)】
+・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
+・キャラクターの配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。LINEスタンプは1個あたり最大320×270pxという小さいサイズで表示されるため、輪郭線をやや太めにし、情報量を少なめにすると視認性が上がります。
+
+【禁止事項】
+・マス目を区切る罫線・グリッド線・仕切り線・枠線は一切描かないでください。
+・文字、ロゴ、フレーム線、透かしも入れないでください。
+・添付画像の実写的な質感(写真そのものの見た目)を残さないでください。必ずイラストとして描き起こしてください。
+・背景やキャラクター周りの余白に、影・床面・グラデーション・色付きの装飾パネルなど、単色以外の要素を追加しないでください。`;
+        }
+
+        function animationStampPromptWithText(rows, cols, count) {
+            return `添付した画像(人物の顔やペットなどの写真)を元に、LINEアニメーションスタンプ制作用の元イラスト(セリフ・文字入り)を1枚のグリッド画像として生成してください。
+
+【添付画像の扱い方】
+・添付画像に写っている被写体の特徴(顔立ちや体型、毛色・柄、髪型、目の形、耳や尻尾の形など)を保ちつつ、写真そのものではなく、LINEスタンプらしいシンプルな線画イラストに変換してください。肌や毛の質感、写真的な陰影など写実的な表現はそのまま残さないでください。
+・[ここにイラストのタッチを指定してください(例: 2〜3頭身のデフォルメ・ちびキャラ風、フラットな塗りのアニメ調 など)]
+
+【グリッド構成(区切り線は描かない)】
+・画像全体を${rows}行×${cols}列(合計${count}マス)のマス目状に、均等な間隔を空けて配置してください。
+・マスとマスの境界を示す罫線・グリッド線・仕切り線・枠線は絶対に描かないでください。背景は画像全体を通して継ぎ目のない1色の無地にし、マスの区切りが線や色の変化として見た目に分からないようにしてください(マス目はあくまで配置の目安で、あとで人間が座標を指定して均等に切り出すため、視覚的な境界線は不要です)。
+・各マスの縦横比は約320:270(ヨコ:タテ ≒ 6:5)に近づけ、キャラクター同士の間隔が均等になるようにしてください。
+・添付画像の被写体を1体ずつ全マスに描き、マスごとに日常会話で使いやすい異なるポーズ・表情(例: 挨拶、喜ぶ、驚く、うなずく、お辞儀、OKサイン、感謝など)にしてください。
+・【最重要・余白の確保】後の動画化で見切れないよう、各マスの上下左右に十分な余白(目安: 各辺に対して30%程度、キャラクターと文字はマス中央寄りに小さめ)を確保して配置してください。手を振る・ジャンプするなどの動きを付けてもマスの枠からはみ出さないよう、可動域となる余白をしっかり空けてください。余白部分にも床・影・装飾などの要素は一切描かず、背景と同じ単色のままにしてください。
+
+【セリフ・テキストの配置(視認性重視)】
+・全${count}マスのキャラクターに、ポーズや表情に合わせたLINE日常会話で使いやすい短いセリフ(ひらがな・カタカナ・簡単な漢字・感嘆符)を添えてください。
+・[ここに各マスのセリフ案を記入してください(例: 1:ありがとう 2:おつかれさま 3:OK 4:了解 5:ぺこり 6:おやすみ 7:びっくり 8:わーい など)]
+・文字はスマートフォンの小さな画面で縮小表示されても一目で読めるよう、太めのポップ体や丸ゴシック調のフォント風にし、太い白フチや黒フチを付けて背景やキャラクターから浮き立たせてください。
+・後の動画化で文字が崩れないよう、文字はシンプルで装飾が多すぎないデザインにしてください。
+
+【キャラクターの一貫性】
+・全${count}マスで、添付画像から起こしたキャラクターの体型・配色・絵柄タッチ・顔立ちを完全に統一してください。マスごとにキャラクターがブレたり別人・別の個体になったりしないようにしてください。
+
+【背景・色数(LINE審査対応)】
+・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
+・キャラクターや文字の配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。LINEスタンプは1個あたり最大320×270pxという小さいサイズで表示されるため、輪郭線をやや太めにし、情報量を少なめにすると視認性が上がります。
+
+【禁止事項】
+・マス目を区切る罫線・グリッド線・仕切り線・枠線は一切描かないでください。
+・小さすぎて読めない長文のテキスト、ロゴ、フレーム線、透かしは入れないでください。
+・意図しない文字化けや意味の通らない誤字・崩れた文字が入らないよう、シンプルで明瞭な日本語にしてください。
+・添付画像の実写的な質感(写真そのものの見た目)を残さないでください。必ずイラストとして描き起こしてください。
+・背景やキャラクター周りの余白に、影・床面・グラデーション・色付きの装飾パネルなど、単色以外の要素を追加しないでください。`;
+        }
+
+        function animationMainImagePrompt() {
+            return `添付した画像(人物の顔やペットなどの写真)を元に、LINEスタンプの「メイン画像」「トークルームタブ画像」用に、被写体を1体だけ大きく描いた代表イラストを1枚生成してください。
+
+【添付画像の扱い方】
+・添付画像に写っている被写体の特徴(顔立ちや体型、毛色・柄、髪型、目の形、耳や尻尾の形など)を保ちつつ、写真そのものではなく、LINEスタンプらしいシンプルな線画イラストに変換してください。肌や毛の質感、写真的な陰影など写実的な表現はそのまま残さないでください。
+・[ここにイラストのタッチを指定してください(スタンプ本体用に指定したタッチと揃えてください)]
+・[ここに服装・小物など、添付画像に無い設定があれば記入してください]
+・スタンプ本体用に別途イラスト・動画を作っている場合は、そのキャラクターと体型・配色・絵柄タッチ・顔立ちが完全に一致するようにしてください。
+
+【構図・ポーズ】
+・被写体を画面中央に大きく、上下左右に均等な余白(目安: 各辺15〜20%)を残して1体だけ配置してください。このスタンプセット全体を代表する、最も親しみやすい・分かりやすいポーズ・表情にしてください(例: 笑顔で手を振る、正面を向いて微笑む など)。
+・[ここに具体的なポーズ・表情を記入してください]
+・出力画像の縦横比は正方形(1:1)に近づけてください。
+・この後の工程でキャラクターに動き(手を振る など)を付けるため、その可動域として余白を残してください。余白部分にも床・影・色面・模様などの新しい要素は一切描き加えず、背景と全く同じ単色のままにしてください。
+
+【背景・色数(LINE審査対応)】
+・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
+・キャラクターの配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。
+
+【禁止事項】
+・文字、ロゴ、フレーム線、透かしも入れないでください。
+・添付画像の実写的な質感(写真そのものの見た目)を残さないでください。必ずイラストとして描き起こしてください。
+・背景やキャラクター周りの余白に、影・床面・グラデーション・色付きの装飾パネルなど、単色以外の要素を追加しないでください。`;
+        }
+
+        function animationMainImagePromptWithText() {
+            return `添付した画像(人物の顔やペットなどの写真)を元に、LINEスタンプの「メイン画像」「トークルームタブ画像」用に、被写体を1体だけ大きく描いた代表イラスト(セリフ・文字入り)を1枚生成してください。
+
+【添付画像の扱い方】
+・添付画像に写っている被写体の特徴(顔立ちや体型、毛色・柄、髪型、目の形、耳や尻尾の形など)を保ちつつ、写真そのものではなく、LINEスタンプらしいシンプルな線画イラストに変換してください。肌や毛の質感、写真的な陰影など写実的な表現はそのまま残さないでください。
+・[ここにイラストのタッチを指定してください(スタンプ本体用に指定したタッチと揃えてください)]
+・[ここに服装・小物など、添付画像に無い設定があれば記入してください]
+・スタンプ本体用に別途イラスト・動画を作っている場合は、そのキャラクターと体型・配色・絵柄タッチ・顔立ちが完全に一致するようにしてください。
+
+【セリフ・文字の配置(任意)】
+・[ここにメイン画像に入れたいセリフやタイトルを記入してください(例: ありがとう、よろしく、または文字不要の場合はこの項目を削除)]
+・文字を入れる場合は、縮小表示されても読みやすいよう太字フチ付きで、キャラクターの邪魔にならない位置に配置してください。後の動画化で崩れないようシンプルなデザインにしてください。
+
+【構図・ポーズ】
+・被写体を画面中央に大きく、上下左右に均等な余白(目安: 各辺15〜20%)を残して1体だけ配置してください。このスタンプセット全体を代表する、最も親しみやすい・分かりやすいポーズ・表情にしてください(例: 笑顔で手を振る、正面を向いて微笑む など)。
+・[ここに具体的なポーズ・表情を記入してください]
+・出力画像の縦横比は正方形(1:1)に近づけてください。
+・この後の工程でキャラクターに動き(手を振る など)を付けるため、その可動域として余白を残してください。余白部分にも床・影・色面・模様などの新しい要素は一切描き加えず、背景と全く同じ単色のままにしてください。
+
+【背景・色数(LINE審査対応)】
+・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
+・キャラクターや文字の配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。
+
+【禁止事項】
+・意図しない文字化けや誤字、小さすぎる長文、ロゴ、フレーム線、透かしは入れないでください。
+・添付画像の実写的な質感(写真そのものの見た目)を残さないでください。必ずイラストとして描き起こしてください。
+・背景やキャラクター周りの余白に、影・床面・グラデーション・色付きの装飾パネルなど、単色以外の要素を追加しないでください。`;
+        }
+
+        function animationMainFlowPrompt() {
+            return `添付したイラスト(LINEスタンプの「メイン画像」「トークルームタブ画像」用の代表カット)を入力画像として、image-to-videoで動画化してください。添付画像に描かれているキャラクター・配色・構図をそのまま忠実に再現し、新しく描き直したり、別のデザインに変えたりしないでください。
+
+【忠実に再現すべき点(添付画像から変更しない)】
+・キャラクターの体型・配色・絵柄タッチ・顔立ち・ポーズ・表情は、添付画像のまま忠実に維持してください。
+・背景は添付画像と同じ単色のまま、継ぎ目なく維持してください。新たに罫線・枠線・模様を追加しないでください。
+・出力する動画のアスペクト比も、添付画像と同じ比率(正方形に近い比率)にしてください。
+
+【動きの指定】
+・キャラクターに、このスタンプセット全体を代表するような短い動き(例: 笑顔で手を振り続ける、ゆっくり瞬きする、うなずく など)を付けてください。
+・[ここに動きの案を記入してください]
+・開始時と終了時でキャラクターがほぼ同じ姿勢に戻る、1〜2秒程度の短いループ動作にしてください。
+・カメラはズーム・パンをせず固定し、キャラクター全体が常にフレーム内に収まるようにしてください。
+・手を振る・跳ねるなどの動きを付ける際も、体や手足が画面の外にはみ出さないようにしてください。
+
+【容量対応(LINE審査対応)】
+・動きを付ける際も、添付画像にない複雑なグラデーション・光沢・粒子エフェクト・ノイズを新たに発生させないでください。メイン画像は240×240pxのAPNGに変換するため、情報量が多いと容量オーバーの原因になります。
+
+【禁止事項】
+・文字、ロゴ、時計・日付などの透かしも入れないでください。
+・音声・BGMは生成しないでください(無音のままで構いません)。`;
+        }
+
+        function animationMainFlowPromptWithText() {
+            return `添付したイラスト(LINEスタンプの「メイン画像」「トークルームタブ画像」用の代表カット・セリフ文字入り)を入力画像として、image-to-videoで動画化してください。添付画像に描かれているキャラクター・セリフ文字・配色・構図をそのまま忠実に再現し、新しく描き直したり、別のデザインに変えたりしないでください。
+
+【忠実に再現すべき点(添付画像から変更しない)】
+・キャラクターの体型・配色・絵柄タッチ・顔立ち・ポーズ・表情、およびセリフ文字は、添付画像のまま忠実に維持してください。
+・背景は添付画像と同じ単色のまま、継ぎ目なく維持してください。新たに罫線・枠線・模様を追加しないでください。
+・出力する動画のアスペクト比も、添付画像と同じ比率(正方形に近い比率)にしてください。
+
+【文字(セリフ)の扱い】
+・添付画像に描かれているセリフ文字は、動画化の過程で文字化け・溶け・崩れ・消失が起きないよう、静止させたまま維持するか、キャラクターの動きに合わせて自然に揺れる程度にとどめてください。文字のフォントや文言を変えたり、新しい文字を追加したりしないでください。
+
+【動きの指定】
+・キャラクターに、このスタンプセット全体を代表するような短い動き(例: 笑顔で手を振り続ける、ゆっくり瞬きする、うなずく など)を付けてください。
+・[ここに動きの案を記入してください]
+・開始時と終了時でキャラクターがほぼ同じ姿勢に戻る、1〜2秒程度の短いループ動作にしてください。
+・カメラはズーム・パンをせず固定し、キャラクターと文字全体が常にフレーム内に収まるようにしてください。
+・手を振る・跳ねるなどの動きを付ける際も、体や手足・文字が画面の外にはみ出さないようにしてください。
+
+【容量対応(LINE審査対応)】
+・動きを付ける際も、添付画像にない複雑なグラデーション・光沢・粒子エフェクト・ノイズを新たに発生させないでください。メイン画像は240×240pxのAPNGに変換するため、情報量が多いと容量オーバーの原因になります。
+
+【禁止事項】
+・新しい文字、ロゴ、時計・日付などの透かしも入れないでください。
+・音声・BGMは生成しないでください(無音のままで構いません)。`;
+        }
+
+        async function copyText(text) {
+            if (navigator.clipboard && window.isSecureContext) {
+                await navigator.clipboard.writeText(text);
+                return;
+            }
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.style.position = "fixed";
+            ta.style.opacity = "0";
+            document.body.appendChild(ta);
+            ta.focus(); ta.select();
+            const ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+            if (!ok) throw new Error("コピーに失敗しました");
+        }
+
+        function renderPromptText(pre, text) {
+            const lines = text.split("\n");
+            lines.forEach((line, i) => {
+                if (/^・\[.*\]$/.test(line.trim())) {
+                    const span = document.createElement("span");
+                    span.className = "placeholder";
+                    span.textContent = line;
+                    pre.appendChild(span);
+                } else {
+                    pre.appendChild(document.createTextNode(line));
+                }
+                if (i < lines.length - 1) pre.appendChild(document.createTextNode("\n"));
+            });
+        }
+
+        function buildPromptBlock(label, iconName, text) {
+            const block = document.createElement("div");
+            block.className = "prompt-block";
+
+            const header = document.createElement("div");
+            header.className = "prompt-block-header";
+
+            const labelEl = document.createElement("div");
+            labelEl.className = "prompt-block-label";
+            labelEl.innerHTML = `<i data-lucide="${iconName}" class="icon"></i> ${label}`;
+
+            const btn = document.createElement("button");
+            btn.className = "copy-btn";
+            btn.innerHTML = '<i data-lucide="copy" class="icon"></i> コピー';
+
+            let resetTimer = null;
+            btn.addEventListener("click", async () => {
+                try {
+                    await copyText(text);
+                    btn.classList.add("copied");
+                    btn.innerHTML = '<i data-lucide="check" class="icon"></i> コピーしました';
+                } catch (e) {
+                    btn.innerHTML = '<i data-lucide="x" class="icon"></i> コピー失敗';
+                }
+                lucide.createIcons({ root: btn });
+                if (resetTimer) clearTimeout(resetTimer);
+                resetTimer = setTimeout(() => {
+                    btn.classList.remove("copied");
+                    btn.innerHTML = '<i data-lucide="copy" class="icon"></i> コピー';
+                    lucide.createIcons({ root: btn });
+                }, 1800);
+            });
+
+            header.appendChild(labelEl);
+            header.appendChild(btn);
+
+            const pre = document.createElement("pre");
+            pre.className = "prompt-text";
+            renderPromptText(pre, text);
+
+            block.appendChild(header);
+            block.appendChild(pre);
+            return block;
+        }
+
+        function buildGridCard(rows, cols, count, note) {
+            if (currentMode === "static" && [8, 16].includes(count)) {
+                return window.buildNoTextPromptEditor(count, rows, cols, currentTextMode);
+            }
+            const card = document.createElement("div");
+            card.className = "card grid-option";
+
+            const title = document.createElement("h3");
+            title.className = "step-title";
+            title.innerHTML = `<i data-lucide="grid-3x3"></i> ${rows} × ${cols}(${rows}行 × ${cols}列)`;
+
+            card.appendChild(title);
+
+            const isWithText = currentTextMode === "with-text";
+
+            if (currentMode === "static") {
+                const label = isWithText
+                    ? "スタンプ画像生成用プロンプト【文字あり】(顔・ペット等の写真を添付して使用)"
+                    : "スタンプ画像生成用プロンプト【文字なし】(顔・ペット等の写真を添付して使用)";
+                const prompt = isWithText
+                    ? staticStampPromptWithText(rows, cols, count)
+                    : staticStampPrompt(rows, cols, count);
+                card.appendChild(buildPromptBlock(label, "image", prompt));
+            } else {
+                const label1 = isWithText
+                    ? "① スタンプ画像生成用プロンプト【文字あり】(顔・ペット等の写真を添付して使用)"
+                    : "① スタンプ画像生成用プロンプト【文字なし】(顔・ペット等の写真を添付して使用)";
+                const prompt1 = isWithText
+                    ? animationStampPromptWithText(rows, cols, count)
+                    : animationStampPrompt(rows, cols, count);
+
+                const label2 = isWithText
+                    ? "② 動画生成用プロンプト【文字あり】(①で選んだイラストを添付してimage-to-video)"
+                    : "② 動画生成用プロンプト【文字なし】(①で選んだイラストを添付してimage-to-video)";
+                const prompt2 = isWithText
+                    ? animationFlowPromptWithText(rows, cols, count)
+                    : animationFlowPrompt(rows, cols, count);
+
+                card.appendChild(buildPromptBlock(label1, "image", prompt1));
+                card.appendChild(buildPromptBlock(label2, "video", prompt2));
+            }
+
+            return card;
+        }
+
+        function renderAboutSection() {
+            const cfg = MODES[currentMode];
+            const wrap = document.getElementById("about-content");
+            wrap.innerHTML = "";
+
+            const desc = document.createElement("p");
+            desc.className = "hint-text";
+            desc.textContent = cfg.aboutDesc;
+            desc.style.whiteSpace = "pre-line";
+
+            const linkBox = document.createElement("div");
+            linkBox.className = "guideline-link-box";
+            linkBox.innerHTML = `
+                <a href="${cfg.guidelineUrl}" target="_blank" rel="noopener noreferrer" class="guideline-link">
+                    <i data-lucide="external-link" class="icon"></i> ${cfg.guidelineLabel}
+                </a>
+            `;
+
+            wrap.appendChild(desc);
+            wrap.appendChild(linkBox);
+        }
+
+        function renderCountTabs() {
+            const tabsWrap = document.getElementById("tabs");
+            tabsWrap.innerHTML = "";
+            const counts = MODES[currentMode].counts;
+            if (!counts.includes(currentCount)) {
+                currentCount = counts[0];
+            }
+            counts.forEach((c) => {
+                const btn = document.createElement("button");
+                btn.className = `tab-btn${c === currentCount ? " active" : ""}`;
+                btn.dataset.count = c;
+                btn.disabled = [24, 32, 40].includes(c);
+                btn.textContent = `${c}枚`;
+                btn.addEventListener("click", () => {
+                    currentCount = c;
+                    tabsWrap.querySelectorAll(".tab-btn").forEach((b) => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    updatePanelDisplay();
+                });
+                tabsWrap.appendChild(btn);
+            });
+        }
+
+        function renderPanels() {
+            const panelsWrap = document.getElementById("panels");
+            panelsWrap.innerHTML = "";
+            const counts = MODES[currentMode].counts;
+            const configs = MODES[currentMode].configs;
+
+            counts.forEach((c) => {
+                const panel = document.createElement("div");
+                panel.className = "count-panel";
+                panel.id = `panel-${c}`;
+                panel.style.display = c === currentCount ? "flex" : "none";
+                (configs[c] || []).forEach((cfg) => {
+                    panel.appendChild(buildGridCard(cfg.rows, cfg.cols, c, cfg.note));
+                });
+                panelsWrap.appendChild(panel);
+            });
+        }
+
+        function updatePanelDisplay() {
+            document.querySelectorAll(".count-panel").forEach((p) => {
+                p.style.display = "none";
+            });
+            const active = document.getElementById(`panel-${currentCount}`);
+            if (active) active.style.display = "flex";
+        }
+
+        function renderMainTabSection() {
+            const cfg = MODES[currentMode];
+            const contentWrap = document.getElementById("main-tab-content");
+            if (!contentWrap) return;
+            contentWrap.innerHTML = "";
+
+            const h2 = document.createElement("h2");
+            h2.className = "step-title";
+            h2.innerHTML = `<i data-lucide="image"></i> ${cfg.mainTabTitle}`;
+
+            const desc = document.createElement("p");
+            desc.className = "hint-text";
+            desc.textContent = cfg.mainTabDesc;
+
+            const ul = document.createElement("ul");
+            ul.className = "manual-list";
+            cfg.mainTabList.forEach((item) => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                ul.appendChild(li);
+            });
+
+            contentWrap.appendChild(h2);
+            contentWrap.appendChild(desc);
+            contentWrap.appendChild(ul);
+
+            const promptsWrap = document.getElementById("main-tab-prompts");
+            promptsWrap.innerHTML = "";
+
+            const isWithText = currentTextMode === "with-text";
+
+            if (currentMode === "static") {
+                const label = isWithText
+                    ? "メイン画像・タブ画像用 代表イラスト生成プロンプト【文字あり】(顔・ペット等の写真を添付して使用)"
+                    : "メイン画像・タブ画像用 代表イラスト生成プロンプト【文字なし】(顔・ペット等の写真を添付して使用)";
+                const prompt = isWithText
+                    ? staticMainImagePromptWithText()
+                    : staticMainImagePrompt();
+                promptsWrap.appendChild(buildPromptBlock(label, "image", prompt));
+            } else {
+                const label1 = isWithText
+                    ? "① 代表イラスト生成用プロンプト【文字あり】(顔・ペット等の写真を添付して使用)"
+                    : "① 代表イラスト生成用プロンプト【文字なし】(顔・ペット等の写真を添付して使用)";
+                const prompt1 = isWithText
+                    ? animationMainImagePromptWithText()
+                    : animationMainImagePrompt();
+
+                const label2 = isWithText
+                    ? "② 動画生成用プロンプト【文字あり】(①のイラストを添付してimage-to-video)"
+                    : "② 動画生成用プロンプト【文字なし】(①のイラストを添付してimage-to-video)";
+                const prompt2 = isWithText
+                    ? animationMainFlowPromptWithText()
+                    : animationMainFlowPrompt();
+
+                promptsWrap.appendChild(buildPromptBlock(label1, "image", prompt1));
+                promptsWrap.appendChild(buildPromptBlock(label2, "video", prompt2));
+            }
+        }
+
+        function switchTextMode(newTextMode) {
+            currentTextMode = newTextMode;
+            document.querySelectorAll(".text-option-btn").forEach((btn) => {
+                btn.classList.toggle("active", btn.dataset.textMode === newTextMode);
+            });
+            renderPanels();
+            renderMainTabSection();
+            lucide.createIcons();
+        }
+
+        function switchMode(newMode) {
+            currentMode = newMode;
+            document.querySelectorAll(".mode-tab-btn").forEach((btn) => {
+                btn.classList.toggle("active", btn.dataset.mode === newMode);
+            });
+            renderAboutSection();
+            renderCountTabs();
+            renderPanels();
+            renderMainTabSection();
+            lucide.createIcons();
+        }
+
+        document.querySelectorAll(".mode-tab-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                switchMode(btn.dataset.mode);
+            });
+        });
+
+        document.querySelectorAll(".text-option-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                switchTextMode(btn.dataset.textMode);
+            });
+        });
+
+        switchMode("static");
+
+    })();
+    </script>
+
+    <footer class="footer">
+        <p class="footer__copy">© 2026 深森呼吸</p>
+    </footer>
+</body>
+
+</html>
