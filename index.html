@@ -14,15 +14,16 @@
     <script src="prompt-pairs.js"></script>
     <style>
         /*
-         * Minimal Web App Design System (line-animationsticker.html踏襲)
-         * Colors: Base (#FFFFFF), Main (#2E9E64), Accent (#EAF7EE), Sub (#A9DFC4)
+         * LINE画像ツールシリーズのデザイン仕様
+         * Colors: Base (#FFFFFF), Main (#00C9A7), Accent (#EFEFEF)
          * Radii: 0px, Shadows: none, Borders: none
          */
         body {
             font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 300;
+            font-weight: 400;
+            font-size: 16px;
             background-color: #FFFFFF;
-            color: #2E9E64;
+            color: #00C9A7;
             margin: 0;
             padding: 48px 24px 0;
             line-height: 1.6;
@@ -45,7 +46,7 @@
             font-size: 32px;
             font-weight: 700;
             margin: 0;
-            color: #2E9E64;
+            color: #00C9A7;
             letter-spacing: 0.05em;
         }
 
@@ -53,7 +54,7 @@
             font-family: 'Noto Sans JP', sans-serif;
             font-size: 16px;
             font-weight: 700;
-            color: #2E9E64;
+            color: #00C9A7;
             letter-spacing: 0.1em;
         }
 
@@ -67,7 +68,7 @@
         }
 
         .card {
-            background-color: #EAF7EE;
+            background-color: #EFEFEF;
             padding: 48px;
             border: none;
             border-radius: 0px;
@@ -88,7 +89,7 @@
             font-family: 'Outfit', 'Noto Sans JP', sans-serif;
             font-size: 24px;
             font-weight: 700;
-            color: #2E9E64;
+            color: #00C9A7;
             margin: 0;
             display: flex;
             align-items: center;
@@ -97,7 +98,7 @@
 
         .hint-text {
             font-size: 16px;
-            color: #2E9E64;
+            color: #00C9A7;
             font-weight: 400;
             line-height: 1.8;
             margin: 0;
@@ -111,7 +112,7 @@
             margin: 0;
             padding-left: 1.2em;
             font-size: 14px;
-            color: #2E9E64;
+            color: #00C9A7;
         }
 
         .manual-list li {
@@ -127,7 +128,7 @@
             align-items: center;
             gap: 8px;
             background-color: #FFFFFF;
-            color: #2E9E64;
+            color: #00C9A7;
             padding: 12px 22px;
             font-family: 'Outfit', 'Noto Sans JP', sans-serif;
             font-size: 15px;
@@ -153,14 +154,15 @@
         .mode-tabs {
             display: flex;
             gap: 2px;
-            background-color: #EAF7EE;
+            background-color: #EFEFEF;
             padding: 0;
         }
 
         .mode-tab-btn {
             flex: 1;
+            min-width: 0;
             background-color: transparent;
-            color: #2E9E64;
+            color: #00C9A7;
             border: none;
             border-radius: 0px;
             box-shadow: none;
@@ -178,7 +180,7 @@
         }
 
         .mode-tab-btn.active {
-            background-color: #2E9E64;
+            background-color: #00C9A7;
             color: #FFFFFF;
         }
 
@@ -186,14 +188,15 @@
         .text-option-tabs {
             display: flex;
             gap: 2px;
-            background-color: #EAF7EE;
+            background-color: #EFEFEF;
             padding: 0;
         }
 
         .text-option-btn {
             flex: 1;
+            min-width: 0;
             background-color: transparent;
-            color: #2E9E64;
+            color: #00C9A7;
             border: none;
             border-radius: 0px;
             box-shadow: none;
@@ -220,7 +223,7 @@
         }
 
         .text-option-btn.active {
-            background-color: #2E9E64;
+            background-color: #00C9A7;
             color: #FFFFFF;
         }
 
@@ -232,8 +235,9 @@
 
         .tab-btn {
             flex: 1;
-            background-color: #EAF7EE;
-            color: #2E9E64;
+            min-width: 0;
+            background-color: #EFEFEF;
+            color: #00C9A7;
             border: none;
             border-radius: 0px;
             box-shadow: none;
@@ -250,16 +254,16 @@
         }
 
         .tab-btn.active {
-            background-color: #2E9E64;
+            background-color: #00C9A7;
             color: #FFFFFF;
         }
 
         .mode-tab-btn:disabled,
         .tab-btn:disabled {
-            background-color: #EEEEEE;
-            color: #999999;
+            background-color: #EFEFEF;
+            color: #00C9A7;
             cursor: not-allowed;
-            opacity: 1;
+            opacity: 0.45;
         }
 
         /* 個数パネル・グリッド構成カード */
@@ -302,7 +306,7 @@
             font-family: 'Outfit', 'Noto Sans JP', sans-serif;
             font-weight: 700;
             font-size: 16px;
-            color: #2E9E64;
+            color: #00C9A7;
         }
 
         .prompt-block-label .icon {
@@ -311,7 +315,7 @@
         }
 
         .copy-btn {
-            background-color: #2E9E64;
+            background-color: #00C9A7;
             color: #FFFFFF;
             border: none;
             border-radius: 0px;
@@ -338,8 +342,8 @@
         }
 
         .copy-btn.copied {
-            background-color: #A9DFC4;
-            color: #2E9E64;
+            background-color: #EFEFEF;
+            color: #00C9A7;
         }
 
         .prompt-text {
@@ -347,19 +351,89 @@
             white-space: pre-wrap;
             word-break: break-word;
             font-family: 'Noto Sans JP', sans-serif;
-            font-weight: 300;
+            font-weight: 400;
             font-size: 14px;
             line-height: 1.9;
-            color: #2E9E64;
+            color: #00C9A7;
         }
 
         .prompt-text .placeholder {
-            background-color: #EAF7EE;
-            color: #2E9E64;
+            background-color: #EFEFEF;
+            color: #00C9A7;
             font-weight: 700;
             box-decoration-break: clone;
             -webkit-box-decoration-break: clone;
             padding: 2px 4px;
+        }
+
+        /* プロンプト編集画面にもシリーズ共通の色と操作状態を適用 */
+        .prompt-builder .style-choice,
+        .prompt-builder .category-choice,
+        .prompt-builder .selected-poses button,
+        .pose-dialog .pose-options button {
+            border: none;
+            border-radius: 0;
+            background: #FFFFFF;
+            color: #00C9A7;
+        }
+
+        .prompt-builder .style-choice[aria-pressed="true"],
+        .pose-dialog .pose-options [aria-pressed="true"] {
+            background: #00C9A7;
+            color: #FFFFFF;
+        }
+
+        @media (hover: hover) {
+            .prompt-builder .style-choice:hover,
+            .prompt-builder .category-choice:not(:disabled):hover,
+            .pose-dialog .pose-options button:hover {
+                background: #00C9A7;
+                color: #FFFFFF;
+            }
+        }
+
+        .prompt-builder input,
+        .prompt-builder textarea,
+        .pose-dialog input,
+        .pose-dialog textarea,
+        .pose-dialog select {
+            border: none;
+            border-radius: 0;
+            background-color: #FFFFFF;
+            color: #00C9A7;
+        }
+
+        .pose-dialog select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='m3 6 5 5 5-5' fill='none' stroke='%2300C9A7' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+        }
+
+        .pose-dialog {
+            background: #EFEFEF;
+            color: #00C9A7;
+        }
+
+        .prompt-builder .copy-btn,
+        .pose-dialog .copy-btn {
+            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+        }
+
+        .pose-dialog .builder-actions .copy-btn:last-child {
+            background: #FFFFFF;
+            color: #00C9A7;
+        }
+
+        :focus-visible {
+            outline: 3px solid #007D68;
+            outline-offset: 3px;
+        }
+
+        .prompt-builder button:focus-visible,
+        .pose-dialog button:focus-visible {
+            outline-color: #007D68;
         }
 
         /* フッター */
@@ -374,7 +448,7 @@
         .footer__copy {
             font-family: 'Outfit', 'Noto Sans JP', sans-serif;
             font-size: 14px;
-            color: #2E9E64;
+            color: #00C9A7;
             margin: 0;
             letter-spacing: 0.05em;
         }
@@ -391,6 +465,10 @@
             .card {
                 padding: 24px;
                 gap: 20px;
+            }
+
+            #about-card {
+                padding: 24px;
             }
 
             .header-section {
@@ -443,6 +521,11 @@
 
             .prompt-text {
                 font-size: 13px;
+            }
+
+            .prompt-builder .copy-btn,
+            .pose-dialog .copy-btn {
+                font-size: 16px;
             }
         }
     </style>
@@ -557,7 +640,7 @@
 ・全${count}マスで、添付画像から起こしたキャラクターの体型・配色・絵柄タッチ・顔立ちを完全に統一してください。マスごとにキャラクターがブレたり別人・別の個体になったりしないようにしてください。
 
 【背景・色数(LINE審査対応)】
-・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
+・背景は画像全体を通して、指定色「#00FF00」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
 ・キャラクターの配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。LINEスタンプは縮小表示されるため、輪郭線をくっきり太めに描くと視認性が高まります。
 
 【禁止事項】
@@ -591,7 +674,7 @@
 ・全${count}マスで、添付画像から起こしたキャラクターの体型・配色・絵柄タッチ・顔立ちを完全に統一してください。マスごとにキャラクターがブレたり別人・別の個体になったりしないようにしてください。
 
 【背景・色数(LINE審査対応)】
-・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
+・背景は画像全体を通して、指定色「#00FF00」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
 ・キャラクターや文字の配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。LINEスタンプは縮小表示されるため、輪郭線やくっきりしたフチ取りを入れると視認性が高まります。
 
 【禁止事項】
@@ -618,7 +701,7 @@
 ・余白部分にも床・影・色面・模様などの新しい要素は一切描き加えず、背景と全く同じ単色のままにしてください。
 
 【背景・色数(LINE審査対応)】
-・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
+・背景は画像全体を通して、指定色「#00FF00」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
 ・キャラクターの配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。
 
 【禁止事項】
@@ -647,7 +730,7 @@
 ・余白部分にも床・影・色面・模様などの新しい要素は一切描き加えず、背景と全く同じ単色のままにしてください。
 
 【背景・色数(LINE審査対応)】
-・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
+・背景は画像全体を通して、指定色「#00FF00」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
 ・キャラクターや文字の配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。
 
 【禁止事項】
@@ -728,7 +811,7 @@
 ・全${count}マスで、添付画像から起こしたキャラクターの体型・配色・絵柄タッチ・顔立ちを完全に統一してください。マスごとにキャラクターがブレたり別人・別の個体になったりしないようにしてください。
 
 【背景・色数(LINE審査対応)】
-・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
+・背景は画像全体を通して、指定色「#00FF00」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
 ・キャラクターの配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。LINEスタンプは1個あたり最大320×270pxという小さいサイズで表示されるため、輪郭線をやや太めにし、情報量を少なめにすると視認性が上がります。
 
 【禁止事項】
@@ -762,7 +845,7 @@
 ・全${count}マスで、添付画像から起こしたキャラクターの体型・配色・絵柄タッチ・顔立ちを完全に統一してください。マスごとにキャラクターがブレたり別人・別の個体になったりしないようにしてください。
 
 【背景・色数(LINE審査対応)】
-・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
+・背景は画像全体を通して、指定色「#00FF00」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。マスごとに背景色を変えたり、影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素を追加したりしないでください。あとから背景だけを透過処理する前提です。
 ・キャラクターや文字の配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。LINEスタンプは1個あたり最大320×270pxという小さいサイズで表示されるため、輪郭線をやや太めにし、情報量を少なめにすると視認性が上がります。
 
 【禁止事項】
@@ -789,7 +872,7 @@
 ・この後の工程でキャラクターに動き(手を振る など)を付けるため、その可動域として余白を残してください。余白部分にも床・影・色面・模様などの新しい要素は一切描き加えず、背景と全く同じ単色のままにしてください。
 
 【背景・色数(LINE審査対応)】
-・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
+・背景は画像全体を通して、指定色「#00FF00」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
 ・キャラクターの配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。
 
 【禁止事項】
@@ -818,7 +901,7 @@
 ・この後の工程でキャラクターに動き(手を振る など)を付けるため、その可動域として余白を残してください。余白部分にも床・影・色面・模様などの新しい要素は一切描き加えず、背景と全く同じ単色のままにしてください。
 
 【背景・色数(LINE審査対応)】
-・背景は画像全体を通して、指定色「#5AFF19」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
+・背景は画像全体を通して、指定色「#00FF00」(クロマキー用の鮮やかな黄緑色)の完全な無地にしてください。影・床面・グラデーション・色付きの装飾パネルなど単色以外の要素は追加しないでください。あとから背景だけを透過処理する前提です。
 ・キャラクターや文字の配色は少ない色数のべた塗りを基本とし、細かいグラデーション・光沢・テクスチャ・ノイズは避けてください。
 
 【禁止事項】
