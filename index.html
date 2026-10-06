@@ -108,6 +108,18 @@
             padding: 32px 40px;
         }
 
+        #notice-card {
+            padding: 28px 40px;
+        }
+
+        .notice-text {
+            font-size: 14px;
+            color: #00C9A7;
+            font-weight: 400;
+            line-height: 1.8;
+            margin: 0;
+        }
+
         .manual-list {
             margin: 0;
             padding-left: 1.2em;
@@ -150,39 +162,6 @@
             height: 16px;
         }
 
-        /* スタンプ種別切り替えタブ */
-        .mode-tabs {
-            display: flex;
-            gap: 2px;
-            background-color: #EFEFEF;
-            padding: 0;
-        }
-
-        .mode-tab-btn {
-            flex: 1;
-            min-width: 0;
-            background-color: transparent;
-            color: #00C9A7;
-            border: none;
-            border-radius: 0px;
-            box-shadow: none;
-            font-family: 'Outfit', 'Noto Sans JP', sans-serif;
-            font-size: 18px;
-            font-weight: 700;
-            padding: 16px 20px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-align: center;
-        }
-
-        .mode-tab-btn:hover {
-            opacity: 0.85;
-        }
-
-        .mode-tab-btn.active {
-            background-color: #00C9A7;
-            color: #FFFFFF;
-        }
 
         /* 文字有無切り替えタブ */
         .text-option-tabs {
@@ -539,10 +518,6 @@
             <div class="subtitle">- LINEスタンプ画像用プロンプト集 -</div>
         </div>
 
-        <div class="mode-tabs" id="mode-tabs">
-            <button class="mode-tab-btn active" data-mode="static">スタンプ</button>
-            <button class="mode-tab-btn" data-mode="animation" disabled>アニメーションスタンプ</button>
-        </div>
 
         <div class="card" id="about-card">
             <div class="step-section" id="about-content"></div>
@@ -560,6 +535,10 @@
         <div class="tabs" id="tabs"></div>
 
         <div id="panels"></div>
+
+        <div class="card" id="notice-card">
+            <p class="notice-text">画像生成AIの特性上、同じ写真やプロンプトを使っても毎回表情やポーズ、構図の仕上がりが異なります。イメージに近づくまで、複数回生成（再生成）を試したり、プロンプトの言葉を微調整してみてください。</p>
+        </div>
 
         <!-- メイン画像・タブ画像の専用プロンプトは改修まで非表示
         <div class="card" id="main-tab-card">
@@ -1232,11 +1211,6 @@
             lucide.createIcons();
         }
 
-        document.querySelectorAll(".mode-tab-btn").forEach((btn) => {
-            btn.addEventListener("click", () => {
-                switchMode(btn.dataset.mode);
-            });
-        });
 
         document.querySelectorAll(".text-option-btn").forEach((btn) => {
             btn.addEventListener("click", () => {

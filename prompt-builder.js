@@ -100,7 +100,7 @@ ${withText ? `## 文字のデザイン\n\n${textStyleLine(currentTextStyle)}\n- 
         });
         function refreshStyles(){grid.querySelectorAll('button').forEach((b,i)=>b.setAttribute('aria-pressed',String(chosen===i)));}
         card.append(grid);
-        const customLabel=el('label','','選択肢にない見た目'); customLabel.htmlFor=id('custom-style');
+        const customLabel=el('label','','選択肢にない見た目を自由に入力できます'); customLabel.htmlFor=id('custom-style');
         const custom=el('input'); custom.id=id('custom-style'); custom.placeholder='例：色鉛筆風、やさしい色合い';
         if(chosen===-1)custom.value=currentStyle;
         const styleStatus=el('span');styleStatus.id=id('style-status');styleStatus.setAttribute('role','status');
