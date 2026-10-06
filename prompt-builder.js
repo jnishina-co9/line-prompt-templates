@@ -211,11 +211,11 @@ ${withText ? `## 文字のデザイン\n\n${textStyleLine(currentTextStyle)}\n- 
                 document.body.append(dialog);dialog.addEventListener('close',()=>{dialog.remove();trigger.focus();},{once:true});dialog.showModal();
             };
         }
-        const block=el('div','prompt-block');const heading=el('h3','step-title',withText ? '4. プロンプトを確認・編集' : '3. プロンプトを確認・編集');heading.id=id('prompt-edit-title');editor.setAttribute('aria-labelledby',heading.id);
+        const heading=el('h3','step-title',withText ? '4. プロンプトを確認・編集' : '3. プロンプトを確認・編集');heading.id=id('prompt-edit-title');editor.setAttribute('aria-labelledby',heading.id);
         const copy=el('button','copy-btn','プロンプトをコピー');const status=el('span'); status.setAttribute('role','status');
         copy.onclick=async()=>{try{if(navigator.clipboard && window.isSecureContext){await navigator.clipboard.writeText(editor.value);}else{editor.focus();editor.select();if(!document.execCommand('copy'))throw Error();}status.textContent='コピーしました';}catch{status.textContent='コピーできませんでした。入力欄を選択して手動でコピーしてください。';}};
         const actions=el('div','builder-actions');actions.append(copy,status);
-        block.append(el('p','builder-note','直接編集できます。選択を変えると、その項目の行だけを更新します。'),editor,actions);card.append(heading,block);return card;
+        card.append(heading,el('p','builder-note','直接編集できます。選択を変えると、その項目の行だけを更新します。'),editor,actions);return card;
     };
     return build();
     }
