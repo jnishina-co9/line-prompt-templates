@@ -7,7 +7,7 @@
     <title>LINEスタンプ画像用プロンプト集 | PROMPT TEMPLATES</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <link rel="stylesheet" href="prompt-builder.css">
     <script src="prompt-builder.js"></script>
@@ -419,18 +419,48 @@
             outline-color: #007D68;
         }
 
+        /* 案内テキスト */
+        .notice-box {
+            width: 100%;
+            padding: 8px 0;
+            text-align: center;
+        }
+
+        .notice-box .notice-text {
+            font-size: 14px;
+            color: #00C9A7;
+            line-height: 1.8;
+            margin: 0;
+            text-align: center;
+        }
+
+        .notice-box .notice-text span {
+            display: inline-block;
+        }
+
+        .notice-box .notice-text a {
+            color: inherit;
+            text-underline-offset: 3px;
+        }
+
         /* フッター */
         .footer {
-            padding: 24px 0;
+            padding: 32px 0;
             text-align: center;
             background-color: #FFFFFF;
             margin-top: auto;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            align-items: center;
         }
 
+        .footer-copy,
         .footer__copy {
             font-family: 'Outfit', 'Noto Sans JP', sans-serif;
             font-size: 14px;
+            font-weight: 300;
             color: #00C9A7;
             margin: 0;
             letter-spacing: 0.05em;
@@ -510,6 +540,18 @@
             .pose-dialog .copy-btn {
                 font-size: 16px;
             }
+
+            .notice-box {
+                padding: 4px 0;
+            }
+
+            .notice-box .notice-text {
+                font-size: 12px;
+            }
+
+            .notice-box .notice-text span {
+                display: block;
+            }
         }
     </style>
 </head>
@@ -543,6 +585,11 @@
 
         <div class="notice-card-bordered">
             <p class="notice-text">画像生成AIの特性上、同じ写真やプロンプトを使っても毎回表情やポーズ、構図の仕上がりが異なります。<br>イメージに近づくまで、複数回生成を試したり、プロンプトの言葉を微調整してみてください。</p>
+        </div>
+
+        <!-- フッター上の案内テキスト -->
+        <div class="notice-box">
+            <p class="notice-text"><span><a href="https://creator.line.me/ja/guideline/sticker/" target="_blank" rel="noopener noreferrer">LINE公式制作ガイドライン</a>に基づく仕様です。</span><span>審査通過を保証するものではありません。</span></p>
         </div>
 
         <!-- メイン画像・タブ画像の専用プロンプトは改修まで非表示
@@ -1229,7 +1276,7 @@
     </script>
 
     <footer class="footer">
-        <p class="footer__copy">© 2026 深森呼吸</p>
+        <p class="footer-copy footer__copy">© 2026 深森呼吸</p>
     </footer>
 </body>
 
